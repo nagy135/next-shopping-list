@@ -7,7 +7,7 @@ const Adder = () => {
   const [itemName, setItemName] = useState("eggs");
   return (
     // @ts-ignore
-    <form action={createItem} className="container flex flex-col w-64 m-5">
+    <div className="container flex flex-col w-64 m-5">
       <input
         name="name"
         type="text"
@@ -16,10 +16,13 @@ const Adder = () => {
         value={itemName}
         onChange={(e) => setItemName(e.target.value)}
       />
-      <button type="submit" className="rounded bg-sky-500">
+      <button
+        className="rounded bg-sky-500"
+        onClick={() => createItem(itemName)}
+      >
         Add to Cart
       </button>
-    </form>
+    </div>
   );
 };
 
