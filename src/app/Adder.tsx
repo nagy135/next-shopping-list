@@ -6,7 +6,6 @@ import { useState } from "react";
 const Adder = () => {
   const [itemName, setItemName] = useState("eggs");
   return (
-    // @ts-ignore
     <div className="flex flex-col w-1/2 mx-auto mt-10 p-3 gap-3">
       <input
         name="name"

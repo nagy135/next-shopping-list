@@ -22,6 +22,15 @@ export const updateItemValue = async (id: string, value: number) => {
   });
 };
 
+export const removeItem = async (id: string) => {
+  await prisma.item.delete({
+    where: {
+      id,
+    },
+  });
+  revalidatePath("/");
+};
+
 export const getItems = async (): Promise<Item[]> => {
   return await prisma.item.findMany();
 };
