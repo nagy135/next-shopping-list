@@ -7,7 +7,12 @@ export default async function Home() {
   return (
     <div className="container">
       {items.map((e, i) => (
-        <Slider key={`slider-${i}`} name={e.name} initialValue={e.value} />
+        <Slider
+          key={`slider-${i}`}
+          id={e.id}
+          name={e.name}
+          initialValue={e.value}
+        />
       ))}
       <Adder />
     </div>
