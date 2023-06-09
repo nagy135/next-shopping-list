@@ -14,7 +14,7 @@ const Slider = ({ initialValue, name, id }: ISlider) => {
   const [value, setValue] = useState(initialValue);
   return (
     <div className="m-5">
-      <h3 className="mb-5">{name}</h3>
+      <h3 className="mb-5 font-semibold text-lg">{name}</h3>
       <Range
         step={0.1}
         min={0}

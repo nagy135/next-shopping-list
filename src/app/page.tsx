@@ -5,7 +5,7 @@ import { getItems } from "@/db/item.repository";
 export default async function Home() {
   const items = await getItems();
   return (
-    <div className="container">
+    <div className="container mx-auto">
       {items.map((e, i) => (
         <Slider
           key={`slider-${i}`}
