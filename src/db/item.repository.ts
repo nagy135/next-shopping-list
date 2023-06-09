@@ -5,23 +5,21 @@ import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
 
-type ItemAction = Pick<Item, "name">;
-
-const parseItemActionPayload = (payload: FormData): ItemAction => {
-  return {
-    name: payload.get("name") as string,
-  };
-};
-
-export const createItem = async (payload: FormData) => {
-  const itemAction = parseItemActionPayload(payload);
+export const createItem = async (name: string) => {
   await prisma.item.create({
     data: {
-      name: itemAction.name,
+      name: name,
       value: 50,
     },
   });
   revalidatePath("/");
+};
+
+export const updateItemValue = async (id: string, value: number) => {
+  await prisma.item.update({
+    where: { id },
+    data: { value },
+  });
 };
 
 export const getItems = async (): Promise<Item[]> => {
