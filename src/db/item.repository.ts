@@ -6,10 +6,16 @@ import { revalidatePath } from "next/cache";
 const prisma = new PrismaClient();
 
 export const createItem = async (name: string) => {
+  const aggregateMax = await prisma.item.aggregate({
+    _max: {
+      order: true,
+    },
+  });
   await prisma.item.create({
     data: {
       name: name,
       value: 50,
+      order: aggregateMax._max.order ?? 1,
     },
   });
   revalidatePath("/");
@@ -32,5 +38,9 @@ export const removeItem = async (id: string) => {
 };
 
 export const getItems = async (): Promise<Item[]> => {
-  return await prisma.item.findMany();
+  return await prisma.item.findMany({
+    orderBy: {
+      order: "asc",
+    },
+  });
 };
