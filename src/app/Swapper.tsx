@@ -1,6 +1,6 @@
 "use client";
 
-import { removeItem, swapItemOrders } from "@/db/item.repository";
+import { swapItemOrders } from "@/db/item.repository";
 import { TrippleData } from "@/helpers/beforeAfterTripplets";
 
 interface ISwapper {
