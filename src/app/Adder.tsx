@@ -11,7 +11,6 @@ const Adder = () => {
         name="name"
         type="text"
         className="text-red-500 p-3 rounded text-center text-2xl font-semibold"
-        defaultValue={"eggs"}
         value={itemName}
         onChange={(e) => setItemName(e.target.value)}
       />
