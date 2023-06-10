@@ -9,10 +9,10 @@ interface IDeleter {
 const Deleter = ({ id }: IDeleter) => {
   return (
     <button
-      className="rounded bg-red-500 p-3 font-semibold my-3"
+      className="rounded bg-red-500 p-3 text-xl font-semibold my-7"
       onClick={() => removeItem(id)}
     >
-      X
+      ×
     </button>
   );
 };
