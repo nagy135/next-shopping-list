@@ -1,5 +1,6 @@
 "use server";
 
+import { TrippleData } from "@/helpers/beforeAfterTripplets";
 import { PrismaClient, Item } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
@@ -15,7 +16,7 @@ export const createItem = async (name: string) => {
     data: {
       name: name,
       value: 50,
-      order: aggregateMax._max.order ?? 1,
+      order: (aggregateMax._max.order ?? 0) + 1,
     },
   });
   revalidatePath("/");
@@ -43,4 +44,27 @@ export const getItems = async (): Promise<Item[]> => {
       order: "asc",
     },
   });
+};
+
+type Swappable = NonNullable<TrippleData["before"]>;
+export const swapItemOrders = async (first: Swappable, second: Swappable) => {
+  await Promise.all([
+    prisma.item.update({
+      where: {
+        id: first.id,
+      },
+      data: {
+        order: second.order,
+      },
+    }),
+    await prisma.item.update({
+      where: {
+        id: second.id,
+      },
+      data: {
+        order: first.order,
+      },
+    }),
+  ]);
+  revalidatePath("/");
 };
